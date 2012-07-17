@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Redirect
 Plugin URI: http://www.vicchi.org/codeage/wp-redirect/
-Description: Set up an HTTP 301 Redirect from the URL of any post type to another URL, either on your site or external.
+Description: Set up an HTTP 301/302 Redirect from the URL of any post type to another URL, either on your site or externally.
 Version: 1.0
 Author: Gary Gale
 Author URI: http://www.garygale.com/
@@ -91,6 +91,7 @@ class WP_Redirect extends WP_PluginBase {
 		$this->hook ('page_link');
 		$this->hook ('post_link');
 		if (is_admin ()) {
+			$this->hook ('admin_init');
 			$this->hook ('admin_print_scripts');
 			$this->hook ('admin_print_styles');
 			$this->hook ('add_meta_boxes', 'admin_add_meta_boxes');
@@ -111,8 +112,8 @@ class WP_Redirect extends WP_PluginBase {
 		
 		if (!is_array ($settings)) {
 			$settings = array (
-					'wp_redirect_installed' => 'on',
-					'wp_redirect_version' => self::VERSION
+					'installed' => 'on',
+					'version' => self::VERSION
 				); 
 			update_option (self::OPTIONS, $settings);
 		}
@@ -171,6 +172,10 @@ class WP_Redirect extends WP_PluginBase {
 		}
 	}
 
+	/**
+	 * WPRedirectAJAX action hook; called via AJAX to validate an entered redirect URL
+	 */
+	
 	function ajax_check_url () {
 		if ((!isset ($_POST['action']) || empty ($_POST['action'])) ||
 					(!isset ($_POST['url']) || empty ($_POST['url']))) {
@@ -187,6 +192,75 @@ class WP_Redirect extends WP_PluginBase {
 		exit;
 	}
 	
+	/**
+	 * "admin_init" action hook; called after the admin panel is initialised.
+	 */
+
+	function admin_init () {
+		$this->admin_upgrade ();
+	}
+
+	/**
+	 * Called in response to the "admin_init" action hook; checks the current set of
+	 * settings/options and upgrades them according to the new version of the plugin.
+	 */
+	
+	function admin_upgrade () {
+		$settings = null;
+		$upgrade_settings = false;
+		$current_plugin_version = null;
+		
+		/*
+		 * Even if the plugin has only just been installed, the activation hook should have
+		 * fired *before* the admin_init action so therefore we /should/ already have the
+		 * plugin's configuration options defined in the database, but there's no harm in checking
+		 * just to make sure ...
+		 */
+
+		$settings = $this->get_option ();
+
+		/*
+		 * Bale out early if there's no need to check for the need to upgrade the configuration
+		 * settings ...
+		 */
+
+		if (is_array ($settings) &&
+				isset ($settings['version']) &&
+				$settings['version'] == self::VERSION) {
+			return;
+		}
+
+		if (!is_array ($settings)) {
+			/*
+			 * Something odd is going on, so define the default set of config settings ...
+			 */
+			$this->add_settings ();
+		}
+		
+		else {
+			if (isset ($settings['version'])) {
+				$current_plugin_version = $settings['version'];
+			}
+			else {
+				$current_plugin_version = '000';
+			}
+			
+			switch ($current_plugin_version) {
+				case '000':
+				case '100':
+					$settings['version'] = self::VERSION;
+					$upgrade_settings = true;
+
+				default:
+					break;
+			}	// end-switch
+
+			if ($upgrade_settings) {
+				update_option (self::OPTIONS, $settings);
+			}
+		}
+	}
+
 	/**
 	 * "admin_print_scripts" action hook; called to enqueue admin specific scripts.
 	 */
