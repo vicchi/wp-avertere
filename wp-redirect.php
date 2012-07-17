@@ -349,6 +349,13 @@ class WP_Redirect extends WP_PluginBase {
 			}
 		}
 
+		$content[] = '<div id="wp-redirect-url-warning" class="wp-redirect-warning" ' . $style . '>';
+		$content[] = __('Oh no! Your redirect URL doesn\'t validate as well formed; your redirect probably won\'t work.');
+		$content[] = '</div>';
+		$content[] = '<div id="wp-redirect-url-success" class="wp-redirect-success">';
+		$content[] = __('Everything looks good. Your redirect URL is well formed; you should still check this URL actually exists though.');
+		$content[] = '</div>';
+		
 		$title = __('Clear Redirection URL', 'wp-redirect');
 		$id = 'wp-redirect-clear';
 
@@ -358,13 +365,6 @@ class WP_Redirect extends WP_PluginBase {
 		$content[] = '<button id="' . $id . '" class="button-secondary">' . $title . '</button>';
 		$content[] = '</p>';
 
-		$content[] = '<div id="wp-redirect-url-warning" class="wp-redirect-warning" ' . $style . '>';
-		$content[] = __('Oh no! Your redirect URL doesn\'t validate as well formed; your redirect probably won\'t work.');
-		$content[] = '</div>';
-		$content[] = '<div id="wp-redirect-url-success" class="wp-redirect-success">';
-		$content[] = __('Everything looks good. Your redirect URL is well formed; you should still check this URL actually exists though.');
-		$content[] = '</div>';
-		
 		$title = __('Redirection Type', 'wp-redirect');
 		$name = 'wp_redirect_type';
 		$id = 'wp-redirect-type';
