@@ -430,35 +430,35 @@ class WP_Redirect extends WP_PluginBase {
 			return $post_id;
 		}
 
-		$url_key = 'wp_redirect_url';
-		$type_key = 'wp_redirect_type';
+		$url_field = 'wp_redirect_url';
+		$type_field = 'wp_redirect_type';
 
-		$new_meta_url = (isset ($_POST[$url_key]) ? $_POST[$url_key] : '');
-		$new_meta_type = (isset ($_POST[$type_key]) ? $_POST[$type_key] : '');
+		$new_meta_url = (isset ($_POST[$url_field]) ? $_POST[$url_field] : '');
+		$new_meta_type = (isset ($_POST[$type_field]) ? $_POST[$type_field] : '');
 		$new_meta_type = ($new_meta_type == self::REDIRECT_PERMANENT || $new_meta_type == self::REDIRECT_TEMPORARY ? $new_meta_type : '');
 
-		$meta_url = get_post_meta ($post_id, $url_key, true);
-		$meta_type = get_post_meta ($post_id, $type_key, true);
+		$meta_url = get_post_meta ($post_id, self::URL_KEY, true);
+		$meta_type = get_post_meta ($post_id, self::TYPE_KEY, true);
 
 		if ($new_meta_type && '' == $meta_type) {
-			add_post_meta ($post_id, $type_key, $new_meta_type, true);
+			add_post_meta ($post_id, self::TYPE_KEY, $new_meta_type, true);
 		}
 		
 		elseif ($new_meta_type && $new_meta_type != $meta_type) {
-			update_post_meta ($post_id, $type_key, $new_meta_type);
+			update_post_meta ($post_id, self::TYPE_KEY, $new_meta_type);
 		}
 		
 		if ($new_meta_url && '' == $meta_url) {
-			add_post_meta ($post_id, $url_key, $new_meta_url, true);
+			add_post_meta ($post_id, self::URL_KEY, $new_meta_url, true);
 		}
 		
 		elseif ($new_meta_url && $new_meta_url != $meta_url) {
-			update_post_meta ($post_id, $url_key, $new_meta_url);
+			update_post_meta ($post_id, self::URL_KEY, $new_meta_url);
 		}
 		
 		elseif ('' == $new_meta_url && $meta_url) {
-			delete_post_meta ($post_id, $url_key, $meta_url);
-			delete_post_meta ($post_id, $type_key);
+			delete_post_meta ($post_id, self::URL_KEY, $meta_url);
+			delete_post_meta ($post_id, self::TYPE_KEY);
 		}
 	}
 
