@@ -21,6 +21,7 @@ class WP_Redirect extends WP_PluginBase {
 	const DISPLAY_VERSION = 'v1.0.0';
 	const NONCE_NAME = 'wp-redirect-nonce';
 	const URL_KEY = 'wp-redirect-url';
+	const TYPE_KEY = 'wp-redirect-type';
 	const STATUS_KEY = 'wp-redirect-status';
 	const AJAX_ACTION = 'wp_redirect_check_url';
 	const REDIRECT_PERMANENT = 301;
@@ -87,6 +88,7 @@ class WP_Redirect extends WP_PluginBase {
 	function plugins_loaded () {
 		register_activation_hook (__FILE__, array ($this, 'add_settings'));
 		
+		$this->hook ('init');
 		$this->hook ('template_redirect');
 		$this->hook ('page_link');
 		$this->hook ('post_link');
@@ -120,6 +122,15 @@ class WP_Redirect extends WP_PluginBase {
 	}
 
 	/**
+	 * "init" action hook; called to initialise the plugin
+	 */
+	
+	function init () {
+		$lang_dir = basename (dirname (__FILE__)) . DIRECTORY_SEPARATOR . 'lang';
+		load_plugin_textdomain ('wp-redirect', false, $lang_dir);
+	}
+
+	/**
 	 * "page_link" action hook; filters the calculated page URL by the get_page_link
 	 * API call.
 	 *
@@ -129,8 +140,7 @@ class WP_Redirect extends WP_PluginBase {
 	 */
 
 	function page_link  ($link, $id) {
-		$key = 'wp_redirect';
-		$url = get_post_meta ($id, $key, true);
+		$url = get_post_meta ($id, self::URL_KEY, true);
 		if (isset ($url) && !empty ($url)) {
 			$link = $url;
 		}
@@ -147,8 +157,7 @@ class WP_Redirect extends WP_PluginBase {
 	 */
 
 	function post_link ($link, $post) {
-		$key = 'wp_redirect';
-		$url = get_post_meta ($post->ID, $key, true);
+		$url = get_post_meta ($post->ID, self::URL_KEY, true);
 		if (isset ($url) && !empty ($url)) {
 			$link = $url;
 		}
@@ -162,10 +171,8 @@ class WP_Redirect extends WP_PluginBase {
 	
 	function template_redirect () {
 		global $post;
-		$key = 'wp_redirect_url';
-		$url = get_post_meta ($post->ID, $key, true);
-		$key = 'wp_redirect_type';
-		$status = get_post_meta ($post->ID, $key, true);
+		$url = get_post_meta ($post->ID, self::URL_KEY, true);
+		$status = get_post_meta ($post->ID, self::TYPE_KEY, true);
 		if (isset ($url) && !empty ($url) && is_singular ()) {
 			wp_redirect ($url, $status);
 			exit;
@@ -270,7 +277,7 @@ class WP_Redirect extends WP_PluginBase {
 
 		if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
 			$deps = array ('jquery');
-			//wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.min.js');
+			//wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.min.js', $deps);
 			wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.js', $deps);
 			wp_localize_script ('wp-redirect-admin-script',
 				'WPRedirectAJAX',
@@ -331,7 +338,7 @@ class WP_Redirect extends WP_PluginBase {
 		$content[] = '<input class="widefat" type="text" name="' . $name . '" id="' . $id . '" value="' . $url . '" />';
 		$content[] = '<small>' . $text . '</small></p>';
 		
-		$title = __('Check URL');
+		$title = __('Check URL', 'wp-redirect');
 		$id = 'wp-redirect-check';
 		
 		$content[] = '<p>';
@@ -350,10 +357,10 @@ class WP_Redirect extends WP_PluginBase {
 		}
 
 		$content[] = '<div id="wp-redirect-url-warning" class="wp-redirect-warning" ' . $style . '>';
-		$content[] = __('Oh no! Your redirect URL doesn\'t validate as well formed; your redirect probably won\'t work.');
+		$content[] = __('Oh no! Your redirect URL doesn\'t validate as well formed; your redirect probably won\'t work.', 'wp-redirect');
 		$content[] = '</div>';
 		$content[] = '<div id="wp-redirect-url-success" class="wp-redirect-success">';
-		$content[] = __('Everything looks good. Your redirect URL is well formed; you should still check this URL actually exists though.');
+		$content[] = __('Everything looks good. Your redirect URL is well formed; you should still check this URL actually exists though.', 'wp-redirect');
 		$content[] = '</div>';
 		
 		$title = __('Clear Redirection URL', 'wp-redirect');
@@ -374,8 +381,8 @@ class WP_Redirect extends WP_PluginBase {
 		}
 
 		$content[] = '<p><strong>' . $title . '</strong><br />';
-		$content[] = '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . self::REDIRECT_PERMANENT .'" ' . checked ($meta, self::REDIRECT_PERMANENT, false) . '/>&nbsp' . __('Permanent (HTTP 301)', 'wp_redirect') . '<br />';
-		$content[] = '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . self::REDIRECT_TEMPORARY .'" ' . checked ($meta, self::REDIRECT_TEMPORARY, false) . '/>&nbsp' . __('Temporary (HTTP 302)', 'wp_redirect') . '<br />';
+		$content[] = '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . self::REDIRECT_PERMANENT .'" ' . checked ($meta, self::REDIRECT_PERMANENT, false) . '/>&nbsp' . __('Permanent (HTTP 301)', 'wp-redirect') . '<br />';
+		$content[] = '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . self::REDIRECT_TEMPORARY .'" ' . checked ($meta, self::REDIRECT_TEMPORARY, false) . '/>&nbsp' . __('Temporary (HTTP 302)', 'wp-redirect') . '<br />';
 		$content[] = '<small>' . __('Specify the type of redirection; permanent or temporary', 'wp_redirect') . '</small></p>';
 		echo implode (PHP_EOL, $content);
 	}

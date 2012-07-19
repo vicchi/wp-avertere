@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Redirect\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-18 16:32+0100\n"
+"PO-Revision-Date: 2012-07-18 16:32+0100\n"
+"Last-Translator: Gary Gale <gary@vicchi.org>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../..\n"
+
+#: ../../wp-redirect.php:306
+#, php-format
+msgid "Redirect This %s"
+msgstr ""
+
+#: ../../wp-redirect.php:323
+#, php-format
+msgid "Redirect This %s To Another URL"
+msgstr ""
+
+#: ../../wp-redirect.php:326
+#, php-format
+msgid "Enter the URL which this %s should be redirected to each time it's accessed using the Single %s Template"
+msgstr ""
+
+#: ../../wp-redirect.php:334
+msgid "Check URL"
+msgstr ""
+
+#: ../../wp-redirect.php:338
+msgid "A redirection URL which is not well formed will stop the redirection from working; it's a good idea to check this before saving or updating this post"
+msgstr ""
+
+#: ../../wp-redirect.php:353
+msgid "Oh no! Your redirect URL doesn't validate as well formed; your redirect probably won't work."
+msgstr ""
+
+#: ../../wp-redirect.php:356
+msgid "Everything looks good. Your redirect URL is well formed; you should still check this URL actually exists though."
+msgstr ""
+
+#: ../../wp-redirect.php:359
+msgid "Clear Redirection URL"
+msgstr ""
+
+#: ../../wp-redirect.php:363
+#, php-format
+msgid "You can cancel an existing redirection by clearing the URL or click the %s button below"
+msgstr ""
+
+#: ../../wp-redirect.php:368
+msgid "Redirection Type"
+msgstr ""
+
+#: ../../wp-redirect.php:377
+msgid "Permanent (HTTP 301)"
+msgstr ""
+
+#: ../../wp-redirect.php:378
+msgid "Temporary (HTTP 302)"
+msgstr ""
+
+#: ../../wp-redirect.php:379
+msgid "Specify the type of redirection; permanent or temporary"
+msgstr ""
+
