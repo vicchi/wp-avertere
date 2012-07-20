@@ -92,6 +92,7 @@ class WP_Redirect extends WP_PluginBase {
 		$this->hook ('template_redirect');
 		$this->hook ('page_link');
 		$this->hook ('post_link');
+
 		if (is_admin ()) {
 			$this->hook ('admin_init');
 			$this->hook ('admin_print_scripts');
@@ -277,8 +278,8 @@ class WP_Redirect extends WP_PluginBase {
 
 		if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
 			$deps = array ('jquery');
-			//wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.min.js', $deps);
-			wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.js', $deps);
+			wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.min.js', $deps);
+			//wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.js', $deps);
 			wp_localize_script ('wp-redirect-admin-script',
 				'WPRedirectAJAX',
 				array (
@@ -296,8 +297,8 @@ class WP_Redirect extends WP_PluginBase {
 		global $pagenow;
 
 		if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
-			//wp_enqueue_style ('wp-redirect-admin-style', WPREDIRECT_URL . 'css/wp-redirect-admin.min.css');	
-			wp_enqueue_style ('wp-redirect-admin-style', WPREDIRECT_URL . 'css/wp-redirect-admin.css');	
+			wp_enqueue_style ('wp-redirect-admin-style', WPREDIRECT_URL . 'css/wp-redirect-admin.min.css');	
+			//wp_enqueue_style ('wp-redirect-admin-style', WPREDIRECT_URL . 'css/wp-redirect-admin.css');	
 		}
 	}
 
