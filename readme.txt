@@ -1,7 +1,7 @@
-=== WP Redirect ===
+=== WP Avertere ===
 Contributors: vicchi
 Donate link: http://www.vicchi.org/codeage/donate
-Tags: wp-redirect, redirect, redirection, http, 301, 302, temporary, permanent, post, page
+Tags: wp-avertere, redirect, redirection, http, 301, 302, temporary, permanent, post, page
 Requires at least: 3.4
 Tested up to: 3.4.1
 Stable tag: 1.0.0
@@ -32,19 +32,19 @@ While the main use of the plugin is to redirect posts and pages, you can also us
 
 == Installation ==
 
-1. You can install WP Redirect automatically from the WordPress admin panel. From the Dashboard, navigate to the *Plugins / Add New* page and search for *"WP Redirect"* and click on the *"Install Now"* link.
-1. Or you can install WP Redirect manually. Download the plugin Zip archive and uncompress it. Copy or upload the `wp-redirect` folder to the `wp-content/plugins` folder on your web server.
-1. Activate the plugin. From the Dashboard, navigate to Plugins and click on the *"Activate"* link under the entry for WP Redirect.
+1. You can install WP Avertere automatically from the WordPress admin panel. From the Dashboard, navigate to the *Plugins / Add New* page and search for *"WP Avertere"* and click on the *"Install Now"* link.
+1. Or you can install WP Avertere manually. Download the plugin Zip archive and uncompress it. Copy or upload the `wp-avertere` folder to the `wp-content/plugins` folder on your web server.
+1. Activate the plugin. From the Dashboard, navigate to Plugins and click on the *"Activate"* link under the entry for WP Avertere.
 
 == Frequently Asked Questions ==
 
 = How do I get help or support for this plugin? =
 
-In short, very easily. But before you read any further, take a look at [Asking For WordPress Plugin Help And Support Without Tears](http://www.vicchi.org/2012/03/31/asking-for-wordpress-plugin-help-and-support-without-tears/) before firing off a question. In order of preference, you can ask a question on the [WordPress support forum](http://wordpress.org/tags/wp-redirect?forum_id=10); this is by far the best way so that other users can follow the conversation. You can ask me a question on Twitter; I'm [@vicchi](http://twitter.com/vicchi). Or you can drop me an email instead. I can't promise to answer your question but I do promise to answer and do my best to help.
+In short, very easily. But before you read any further, take a look at [Asking For WordPress Plugin Help And Support Without Tears](http://www.vicchi.org/2012/03/31/asking-for-wordpress-plugin-help-and-support-without-tears/) before firing off a question. In order of preference, you can ask a question on the [WordPress support forum](http://wordpress.org/tags/wp-avertere?forum_id=10); this is by far the best way so that other users can follow the conversation. You can ask me a question on Twitter; I'm [@vicchi](http://twitter.com/vicchi). Or you can drop me an email instead. I can't promise to answer your question but I do promise to answer and do my best to help.
 
 = Is there a web site for this plugin? =
 
-Absolutely. Go to the [WP Redirect home page](http://www.vicchi.org/codeage/wp-redirect/) for the latest information. There's also the official [WordPress plugin repository page](http://wordpress.org/extend/plugins/wp-redirect/) and the [source for the plugin is on GitHub](http://vicchi.github.com/wp-redirect/) as well.
+Absolutely. Go to the [WP Avertere home page](http://www.vicchi.org/codeage/wp-avertere/) for the latest information. There's also the official [WordPress plugin repository page](http://wordpress.org/extend/plugins/wp-avertere/) and the [source for the plugin is on GitHub](http://vicchi.github.com/wp-avertere/) as well.
 
 = I've just installed this plugin; where's the admin Settings & Options page for the plugin? =
 
@@ -52,11 +52,11 @@ There isn't one! All the settings and options for the plugin are in the *Redirec
 
 = My redirect URL validates as well formed but the URL now shows a 404/Page Not Found when I click on it. What's going on? =
 
-It's probably just what your browser is telling you. WP Redirect can set up the redirection for you and can check that your redirection URL is well formed. But what it can't do is actually check that the redirection URL points to a web page that actually exists. Now might be a good time to copy and paste your redirection URL into your browser and see if that shows a 404/Page Not Found error. If it does, then the page wasn't found. But if it was found, then you might have found a bug, so get in touch and let me know about it.
+It's probably just what your browser is telling you. WP Avertere can set up the redirection for you and can check that your redirection URL is well formed. But what it can't do is actually check that the redirection URL points to a web page that actually exists. Now might be a good time to copy and paste your redirection URL into your browser and see if that shows a 404/Page Not Found error. If it does, then the page wasn't found. But if it was found, then you might have found a bug, so get in touch and let me know about it.
 
 = My redirect URL looks well formed to me, but the plugin tells me it's not. What's going on here? =
 
-WordPress defines a set of acceptable URL protocols which are returned by the `wp_allowed_protocols` API call. WP Redirect uses the `esc_url` API call, which acts on this set of allowed protocols to determine which URLs are allowed and which are not. At the time of writing, the set is defined as `http(s)`, `ftp(s)`, `mailto`, `news`, `irc`, `gopher`, `nntp`, `feed` and `telnet`. If your redirect URL is not for one of these allowed protocols the redirection will not be set up correctly. You can add to, or even limit, the list of allowed protocols via the `wp_redirect_protocols` filter that the plugin provides. See the *Filter Support And Usage* section for more information on this.
+WordPress defines a set of acceptable URL protocols which are returned by the `wp_allowed_protocols` API call. WP Avertere uses the `esc_url` API call, which acts on this set of allowed protocols to determine which URLs are allowed and which are not. At the time of writing, the set is defined as `http(s)`, `ftp(s)`, `mailto`, `news`, `irc`, `gopher`, `nntp`, `feed` and `telnet`. If your redirect URL is not for one of these allowed protocols the redirection will not be set up correctly. You can add to, or even limit, the list of allowed protocols via the `wp_avertere_protocols` filter that the plugin provides. See the *Filter Support And Usage* section for more information on this.
 
 = My redirect isn't happening. Why not? =
 
@@ -74,7 +74,7 @@ In short, very easily. Edit the post that the redirection is set up on and then 
 
 = Why don't I just use the REFRESH HTML meta tag in my post instead? =
 
-There's nothing wrong with using the `REFRESH` HTML meta tag to redirect to another URL but it's not as easy or efficient as using the plugin. Here's why. The `REFRESH` meta tag lives in a page's header section. You not only need to inject this into the page (you could use the `wp_head` action hook) but you need to wait for the entire page to load before your browser will take note of and act on the `REFRESH` meta tag. WP Redirect hooks into the WordPress `template_redirect` hook and issues an HTTP `Location` header on your behalf; this means that the decision to redirect and the act of actually redirecting takes place before the page even loads, which is faster and more efficient.
+There's nothing wrong with using the `REFRESH` HTML meta tag to redirect to another URL but it's not as easy or efficient as using the plugin. Here's why. The `REFRESH` meta tag lives in a page's header section. You not only need to inject this into the page (you could use the `wp_head` action hook) but you need to wait for the entire page to load before your browser will take note of and act on the `REFRESH` meta tag. WP Avertere hooks into the WordPress `template_redirect` hook and issues an HTTP `Location` header on your behalf; this means that the decision to redirect and the act of actually redirecting takes place before the page even loads, which is faster and more efficient.
 
 = Wait a moment. HTTP 302 is Found not Temporary Redirect. Why aren't you using HTTP 307 Temporary Redirect instead? =
 
@@ -84,13 +84,17 @@ This is a classic case of *industry practice contradicting the standard* (accord
 
 The current version of the plugin doesn't touch comments but after a redirect is set up they won't be visible due to the inherent nature of a redirect. The next version of the plugin will support the ability to copy comments from the source URL to the redirected target URL as long as that URL is on the same WordPress powered site.
 
-= WP Redirect isn't available in my language; can I submit a translation? =
+= WP Avertere isn't available in my language; can I submit a translation? =
 
-WordPress and this plugin use the gettext tools to support internationalisation. The source file containing each string that needs to be translated ships with the plugin in `wp-redirect/lang/src/wp-biographia.po`. See the [I18n for WordPress Developers](http://codex.wordpress.org/I18n_for_WordPress_Developers) page for more information or get in touch for help and hand-holding.
+WordPress and this plugin use the gettext tools to support internationalisation. The source file containing each string that needs to be translated ships with the plugin in `wp-avertere/lang/src/wp-biographia.po`. See the [I18n for WordPress Developers](http://codex.wordpress.org/I18n_for_WordPress_Developers) page for more information or get in touch for help and hand-holding.
 
 = I want to amend/hack/augment this plugin; can I do this? =
 
 Totally; this plugin is licensed under the GNU General Public License v2 (GPLV2). See http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt for the full license terms.
+
+= Where does the name WP Avertere come from? =
+
+WP Avertere is named after the latin for "divert", meaning to turn aside from a path or course.
 
 == Screenshots ==
 
@@ -103,9 +107,24 @@ The current version is 1.0.0 (2012.07.17)
 
 = 1.0.0 =
 * Released 2012.07.17
-* First version of WP Redirect released.
+* First version of WP Avertere released.
 
 == Upgrade Notice ==
 
 = 1.0.0 =
-* This is the first version of WP Redirect.
+* This is the first version of WP Avertere.
+
+== Filter Support And Usage ==
+
+WP Avertere supports a single filter, `wp_avertere_protocols` that allows you to change the set of acceptable URL protocols that WordPress and the plugin permits.
+
+*Example:* Add support for GitHub repositories to the plugin.
+
+`add_filter ('wp_avertere_protocols', 'add_github_protocol');
+
+function add_github_protocol ($protocols) {
+	// protocols = array ('name', 'name', ...)
+	$protocols[] = 'git';
+	
+	return $protocols;
+}`

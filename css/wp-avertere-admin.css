@@ -1,10 +1,10 @@
 @charset "utf-8";
 
-#wp-redirect-url-success {
+#wp-avertere-url-success {
 	display: none;
 }
 
-.wp-redirect-success {
+.wp-avertere-success {
 	border: 1px solid #8ACEFF;
 	padding: 3px 15px 4px 27px;
 	display: block;
@@ -16,7 +16,7 @@
 	background: #E2F5FE url(../images/success.png) no-repeat 5px center;
 }
 
-.wp-redirect-warning {
+.wp-avertere-warning {
 	border: 1px solid #F8C44F;
 	padding: 3px 15px 4px 27px;
 	display: block;
@@ -28,7 +28,7 @@
 	background: #FEE8B9 url(../images/warning.png) no-repeat 5px center;
 }
 
-.wp-redirect-error {
+.wp-avertere-error {
 	border: 1px solid #F96764;
 	padding: 3px 15px 4px 27px;
 	display: block;

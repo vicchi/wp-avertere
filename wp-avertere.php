@@ -1,29 +1,29 @@
 <?php
 /*
-Plugin Name: WP Redirect
-Plugin URI: http://www.vicchi.org/codeage/wp-redirect/
+Plugin Name: WP Avertere
+Plugin URI: http://www.vicchi.org/codeage/wp-avertere/
 Description: Set up and manage an HTTP 301/302 Redirect from the URL of any post type to another URL, either on your site or externally.
 Version: 1.0
 Author: Gary Gale
 Author URI: http://www.garygale.com/
 License: GPL2
-Text Domain: wp-redirect
+Text Domain: wp-avertere
 */
 
-define ('WPREDIRECT_PATH', plugin_dir_path (__FILE__));
-define ('WPREDIRECT_URL', plugin_dir_url (__FILE__));
+define ('WPAVERTERE_PATH', plugin_dir_path (__FILE__));
+define ('WPAVERTERE_URL', plugin_dir_url (__FILE__));
 
-require_once (WPREDIRECT_PATH . '/wp-plugin-base/wp-plugin-base.php');
+require_once (WPAVERTERE_PATH . '/wp-plugin-base/wp-plugin-base.php');
 
-class WP_Redirect extends WP_PluginBase {
-	const OPTIONS = 'wp_redirect_settings';
+class WP_Avertere extends WP_PluginBase {
+	const OPTIONS = 'wp_avertere_settings';
 	const VERSION = '100';
 	const DISPLAY_VERSION = 'v1.0.0';
-	const NONCE_NAME = 'wp-redirect-nonce';
-	const URL_KEY = 'wp-redirect-url';
-	const TYPE_KEY = 'wp-redirect-type';
-	const STATUS_KEY = 'wp-redirect-status';
-	const AJAX_ACTION = 'wp_redirect_check_url';
+	const NONCE_NAME = 'wp-avertere-nonce';
+	const URL_KEY = 'wp-avertere-url';
+	const TYPE_KEY = 'wp-avertere-type';
+	const STATUS_KEY = 'wp-avertere-status';
+	const AJAX_ACTION = 'wp_avertere_check_url';
 	const REDIRECT_PERMANENT = 301;
 	const REDIRECT_TEMPORARY = 302;
 	
@@ -36,7 +36,7 @@ class WP_Redirect extends WP_PluginBase {
 	}
 
 	/**
-	 * Queries the back-end database for WP Redirect settings and options.
+	 * Queries the back-end database for WP Avertere settings and options.
 	 *
 	 * @param string $key Optional settings/options key name; if specified only the value
 	 * for the key will be returned, if the key exists, if omitted all settings/options
@@ -128,7 +128,7 @@ class WP_Redirect extends WP_PluginBase {
 	
 	function init () {
 		$lang_dir = basename (dirname (__FILE__)) . DIRECTORY_SEPARATOR . 'lang';
-		load_plugin_textdomain ('wp-redirect', false, $lang_dir);
+		load_plugin_textdomain ('wp-avertere', false, $lang_dir);
 	}
 
 	/**
@@ -191,7 +191,7 @@ class WP_Redirect extends WP_PluginBase {
 		}
 
 		$raw_url = $_POST['url'];
-		$protocols = apply_filters ('wp_redirect_protocols', wp_allowed_protocols ());
+		$protocols = apply_filters ('wp_avertere_protocols', wp_allowed_protocols ());
 		$escaped_url = esc_url ($raw_url, $protocols);
 		$success = (isset ($escaped_url) && !empty ($escaped_url));
 		$response = json_encode (array ('success' => $success));
@@ -278,9 +278,9 @@ class WP_Redirect extends WP_PluginBase {
 
 		if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
 			$deps = array ('jquery');
-			wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.min.js', $deps);
-			//wp_enqueue_script ('wp-redirect-admin-script', WPREDIRECT_URL . 'js/wp-redirect-admin.js', $deps);
-			wp_localize_script ('wp-redirect-admin-script',
+			wp_enqueue_script ('wp-avertere-admin-script', WPAVERTERE_URL . 'js/wp-avertere-admin.min.js', $deps);
+			//wp_enqueue_script ('wp-avertere-admin-script', WPAVERTERE_URL . 'js/wp-avertere-admin.js', $deps);
+			wp_localize_script ('wp-avertere-admin-script',
 				'WPRedirectAJAX',
 				array (
 					'ajaxurl' => admin_url ('admin-ajax.php'),
@@ -297,8 +297,8 @@ class WP_Redirect extends WP_PluginBase {
 		global $pagenow;
 
 		if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
-			wp_enqueue_style ('wp-redirect-admin-style', WPREDIRECT_URL . 'css/wp-redirect-admin.min.css');	
-			//wp_enqueue_style ('wp-redirect-admin-style', WPREDIRECT_URL . 'css/wp-redirect-admin.css');	
+			wp_enqueue_style ('wp-avertere-admin-style', WPAVERTERE_URL . 'css/wp-avertere-admin.min.css');	
+			//wp_enqueue_style ('wp-avertere-admin-style', WPAVERTERE_URL . 'css/wp-avertere-admin.css');	
 		}
 	}
 
@@ -310,8 +310,8 @@ class WP_Redirect extends WP_PluginBase {
 	function admin_add_meta_boxes () {
 		$pts = get_post_types (array (), 'objects');
 		foreach ($pts as $pt) {
-			$id = sprintf ('wp-redirect-%s-meta', $pt->name);
-			$title = sprintf (__('Redirect This %s', 'wp-redirect'), $pt->labels->singular_name);
+			$id = sprintf ('wp-avertere-%s-meta', $pt->name);
+			$title = sprintf (__('Redirect This %s', 'wp-avertere'), $pt->labels->singular_name);
 			
 			add_meta_box ($id, $title, array ($this, 'admin_display_meta_box'), $pt->name);
 		}	// end-foreach
@@ -328,10 +328,10 @@ class WP_Redirect extends WP_PluginBase {
 		$content = array ();
 		$pt = get_post_type ();
 		$pto = get_post_type_object ($pt);
-		$title = sprintf (__('Redirect This %s To Another URL', 'wp-redirect'), $pto->labels->singular_name);
-		$name = 'wp_redirect_url';
-		$id = 'wp-redirect-url';
-		$text = sprintf (__('Enter the URL which this %s should be redirected to each time it\'s accessed using the Single %s Template', 'wp-redirect'), $pto->labels->singular_name, $pto->labels->singular_name);
+		$title = sprintf (__('Redirect This %s To Another URL', 'wp-avertere'), $pto->labels->singular_name);
+		$name = 'wp_avertere_url';
+		$id = 'wp-avertere-url';
+		$text = sprintf (__('Enter the URL which this %s should be redirected to each time it\'s accessed using the Single %s Template', 'wp-avertere'), $pto->labels->singular_name, $pto->labels->singular_name);
 		$url = esc_attr (get_post_meta ($post->ID, $name, true));
 		
 		$content[] = wp_nonce_field (basename (__FILE__), self::NONCE_NAME);
@@ -339,52 +339,52 @@ class WP_Redirect extends WP_PluginBase {
 		$content[] = '<input class="widefat" type="text" name="' . $name . '" id="' . $id . '" value="' . $url . '" />';
 		$content[] = '<small>' . $text . '</small></p>';
 		
-		$title = __('Check URL', 'wp-redirect');
-		$id = 'wp-redirect-check';
+		$title = __('Check URL', 'wp-avertere');
+		$id = 'wp-avertere-check';
 		
 		$content[] = '<p>';
-		$content[] = __('A redirection URL which is not well formed will stop the redirection from working; it\'s a good idea to check this before saving or updating this post', 'wp-redirect');
+		$content[] = __('A redirection URL which is not well formed will stop the redirection from working; it\'s a good idea to check this before saving or updating this post', 'wp-avertere');
 		$content[] = '<br />';
 		$content[] = '<button id="' . $id . '" class="button-secondary">' . $title . '</button>';
 		$content[] = '</p>';
 
 		$style = 'style="display: none;"';
 		if (isset ($url) && !empty ($url)) {
-			$protocols = apply_filters ('wp_redirect_protocols', wp_allowed_protocols ());
+			$protocols = apply_filters ('wp_avertere_protocols', wp_allowed_protocols ());
 			$escaped_url = esc_url ($url, $protocols);
 			if (!isset ($escaped_url) || empty ($escaped_url)) {
 				$style = '';
 			}
 		}
 
-		$content[] = '<div id="wp-redirect-url-warning" class="wp-redirect-warning" ' . $style . '>';
-		$content[] = __('Oh no! Your redirect URL doesn\'t validate as well formed; your redirect probably won\'t work.', 'wp-redirect');
+		$content[] = '<div id="wp-avertere-url-warning" class="wp-avertere-warning" ' . $style . '>';
+		$content[] = __('Oh no! Your redirect URL doesn\'t validate as well formed; your redirect probably won\'t work.', 'wp-avertere');
 		$content[] = '</div>';
-		$content[] = '<div id="wp-redirect-url-success" class="wp-redirect-success">';
-		$content[] = __('Everything looks good. Your redirect URL is well formed; you should still check this URL actually exists though.', 'wp-redirect');
+		$content[] = '<div id="wp-avertere-url-success" class="wp-avertere-success">';
+		$content[] = __('Everything looks good. Your redirect URL is well formed; you should still check this URL actually exists though.', 'wp-avertere');
 		$content[] = '</div>';
 		
-		$title = __('Clear Redirection URL', 'wp-redirect');
-		$id = 'wp-redirect-clear';
+		$title = __('Clear Redirection URL', 'wp-avertere');
+		$id = 'wp-avertere-clear';
 
 		$content[] = '<p>';
-		$content[] = sprintf (__('You can cancel an existing redirection by clearing the URL or click the %s button below', 'wp-redirect'), $title);
+		$content[] = sprintf (__('You can cancel an existing redirection by clearing the URL or click the %s button below', 'wp-avertere'), $title);
 		$content[] = '<br />';
 		$content[] = '<button id="' . $id . '" class="button-secondary">' . $title . '</button>';
 		$content[] = '</p>';
 
-		$title = __('Redirection Type', 'wp-redirect');
-		$name = 'wp_redirect_type';
-		$id = 'wp-redirect-type';
+		$title = __('Redirection Type', 'wp-avertere');
+		$name = 'wp_avertere_type';
+		$id = 'wp-avertere-type';
 		$meta = esc_attr (get_post_meta ($post->ID, $name, true));
 		if (!isset ($meta) || empty ($meta)) {
 			$meta = self::REDIRECT_PERMANENT;
 		}
 
 		$content[] = '<p><strong>' . $title . '</strong><br />';
-		$content[] = '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . self::REDIRECT_PERMANENT .'" ' . checked ($meta, self::REDIRECT_PERMANENT, false) . '/>&nbsp' . __('Permanent (HTTP 301)', 'wp-redirect') . '<br />';
-		$content[] = '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . self::REDIRECT_TEMPORARY .'" ' . checked ($meta, self::REDIRECT_TEMPORARY, false) . '/>&nbsp' . __('Temporary (HTTP 302)', 'wp-redirect') . '<br />';
-		$content[] = '<small>' . __('Specify the type of redirection; permanent or temporary', 'wp_redirect') . '</small></p>';
+		$content[] = '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . self::REDIRECT_PERMANENT .'" ' . checked ($meta, self::REDIRECT_PERMANENT, false) . '/>&nbsp' . __('Permanent (HTTP 301)', 'wp-avertere') . '<br />';
+		$content[] = '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . self::REDIRECT_TEMPORARY .'" ' . checked ($meta, self::REDIRECT_TEMPORARY, false) . '/>&nbsp' . __('Temporary (HTTP 302)', 'wp-avertere') . '<br />';
+		$content[] = '<small>' . __('Specify the type of redirection; permanent or temporary', 'wp-redirect') . '</small></p>';
 		echo implode (PHP_EOL, $content);
 	}
 
@@ -431,8 +431,8 @@ class WP_Redirect extends WP_PluginBase {
 			return $post_id;
 		}
 
-		$url_field = 'wp_redirect_url';
-		$type_field = 'wp_redirect_type';
+		$url_field = 'wp_avertere_url';
+		$type_field = 'wp_avertere_type';
 
 		$new_meta_url = (isset ($_POST[$url_field]) ? $_POST[$url_field] : '');
 		$new_meta_type = (isset ($_POST[$type_field]) ? $_POST[$type_field] : '');
@@ -463,8 +463,8 @@ class WP_Redirect extends WP_PluginBase {
 		}
 	}
 
-}	// end-class WP_Redirect
+}	// end-class WP_Avertere
 
-$__wp_redirect_instance = new WP_Redirect;
+$__wp_avertere_instance = new WP_Avertere;
 
 ?>
