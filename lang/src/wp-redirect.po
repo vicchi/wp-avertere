@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Redirect\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-18 16:32+0100\n"
-"PO-Revision-Date: 2012-07-18 16:32+0100\n"
+"POT-Creation-Date: 2012-07-19 11:27+0100\n"
+"PO-Revision-Date: 2012-07-19 15:32+0100\n"
 "Last-Translator: Gary Gale <gary@vicchi.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,59 +13,59 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../..\n"
 
-#: ../../wp-redirect.php:306
+#: ../../wp-redirect.php:316
 #, php-format
 msgid "Redirect This %s"
 msgstr ""
 
-#: ../../wp-redirect.php:323
+#: ../../wp-redirect.php:333
 #, php-format
 msgid "Redirect This %s To Another URL"
 msgstr ""
 
-#: ../../wp-redirect.php:326
+#: ../../wp-redirect.php:336
 #, php-format
 msgid "Enter the URL which this %s should be redirected to each time it's accessed using the Single %s Template"
 msgstr ""
 
-#: ../../wp-redirect.php:334
+#: ../../wp-redirect.php:344
 msgid "Check URL"
 msgstr ""
 
-#: ../../wp-redirect.php:338
+#: ../../wp-redirect.php:348
 msgid "A redirection URL which is not well formed will stop the redirection from working; it's a good idea to check this before saving or updating this post"
 msgstr ""
 
-#: ../../wp-redirect.php:353
+#: ../../wp-redirect.php:363
 msgid "Oh no! Your redirect URL doesn't validate as well formed; your redirect probably won't work."
 msgstr ""
 
-#: ../../wp-redirect.php:356
+#: ../../wp-redirect.php:366
 msgid "Everything looks good. Your redirect URL is well formed; you should still check this URL actually exists though."
 msgstr ""
 
-#: ../../wp-redirect.php:359
+#: ../../wp-redirect.php:369
 msgid "Clear Redirection URL"
 msgstr ""
 
-#: ../../wp-redirect.php:363
+#: ../../wp-redirect.php:373
 #, php-format
 msgid "You can cancel an existing redirection by clearing the URL or click the %s button below"
 msgstr ""
 
-#: ../../wp-redirect.php:368
+#: ../../wp-redirect.php:378
 msgid "Redirection Type"
 msgstr ""
 
-#: ../../wp-redirect.php:377
+#: ../../wp-redirect.php:387
 msgid "Permanent (HTTP 301)"
 msgstr ""
 
-#: ../../wp-redirect.php:378
+#: ../../wp-redirect.php:388
 msgid "Temporary (HTTP 302)"
 msgstr ""
 
-#: ../../wp-redirect.php:379
+#: ../../wp-redirect.php:389
 msgid "Specify the type of redirection; permanent or temporary"
 msgstr ""
 
