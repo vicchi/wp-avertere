@@ -88,7 +88,7 @@ The current version of the plugin doesn't touch comments but after a redirect is
 
 WordPress and this plugin use the gettext tools to support internationalisation. The source file containing each string that needs to be translated ships with the plugin in `wp-redirect/lang/src/wp-biographia.po`. See the [I18n for WordPress Developers](http://codex.wordpress.org/I18n_for_WordPress_Developers) page for more information or get in touch for help and hand-holding.
 
-= I want to amend/hack/augment this plugin; can I do the same? =
+= I want to amend/hack/augment this plugin; can I do this? =
 
 Totally; this plugin is licensed under the GNU General Public License v2 (GPLV2). See http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt for the full license terms.
 
