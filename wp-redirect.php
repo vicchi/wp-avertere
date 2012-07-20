@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Redirect
 Plugin URI: http://www.vicchi.org/codeage/wp-redirect/
-Description: Set up an HTTP 301/302 Redirect from the URL of any post type to another URL, either on your site or externally.
+Description: Set up and manage an HTTP 301/302 Redirect from the URL of any post type to another URL, either on your site or externally.
 Version: 1.0
 Author: Gary Gale
 Author URI: http://www.garygale.com/

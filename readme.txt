@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Set up an HTTP 301/302 Redirect from the URL of any post type to another URL, either on your site or externally.
+Set up and manage an HTTP 301/302 Redirect from the URL of any post type to another URL, either on your site or externally.
 
 == Description ==
 
@@ -79,6 +79,10 @@ There's nothing wrong with using the `REFRESH` HTML meta tag to redirect to anot
 = Wait a moment. HTTP 302 is Found not Temporary Redirect. Why aren't you using HTTP 307 Temporary Redirect instead? =
 
 This is a classic case of *industry practice contradicting the standard* (according to [Wikipedia](http://en.wikipedia.org/wiki/HTTP_302)). The HTTP/1.0 standard defined HTTP 301 as *Moved Permanently* and HTTP 302 as *Temporary Redirect*. With the introduction of HTTP/1.1, HTTP 302 changed to *Found* and added HTTP 307 *Temporary Redirect*. But the majority of web services still use HTTP/1.1 302 as the original intent of the HTTP/1.0 meaning.
+
+= My original post had comments; I can't see them now that I've set up a redirect. Where are they? =
+
+The current version of the plugin doesn't touch comments but after a redirect is set up they won't be visible due to the inherent nature of a redirect. The next version of the plugin will support the ability to copy comments from the source URL to the redirected target URL as long as that URL is on the same WordPress powered site.
 
 = WP Redirect isn't available in my language; can I submit a translation? =
 
