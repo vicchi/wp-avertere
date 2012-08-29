@@ -3,7 +3,7 @@
 Plugin Name: WP Avertere
 Plugin URI: http://www.vicchi.org/codeage/wp-avertere/
 Description: Set up and manage an HTTP 301/302 Redirect from the URL of any post type to another URL, either on your site or externally.
-Version: 1.0
+Version: 1.0.1
 Author: Gary Gale
 Author URI: http://www.garygale.com/
 License: GPL2
@@ -17,8 +17,8 @@ require_once (WPAVERTERE_PATH . '/wp-plugin-base/wp-plugin-base.php');
 
 class WP_Avertere extends WP_PluginBase {
 	const OPTIONS = 'wp_avertere_settings';
-	const VERSION = '100';
-	const DISPLAY_VERSION = 'v1.0.0';
+	const VERSION = '101';
+	const DISPLAY_VERSION = 'v1.0.1';
 	const NONCE_NAME = 'wp-avertere-nonce';
 	const URL_KEY = 'wp-avertere-url';
 	const TYPE_KEY = 'wp-avertere-type';
@@ -256,6 +256,7 @@ class WP_Avertere extends WP_PluginBase {
 			switch ($current_plugin_version) {
 				case '000':
 				case '100':
+				case '101':
 					$settings['version'] = self::VERSION;
 					$upgrade_settings = true;
 
@@ -332,7 +333,7 @@ class WP_Avertere extends WP_PluginBase {
 		$name = 'wp_avertere_url';
 		$id = 'wp-avertere-url';
 		$text = sprintf (__('Enter the URL which this %s should be redirected to each time it\'s accessed using the Single %s Template', 'wp-avertere'), $pto->labels->singular_name, $pto->labels->singular_name);
-		$url = esc_attr (get_post_meta ($post->ID, $name, true));
+		$url = esc_attr (get_post_meta ($post->ID, self::URL_KEY, true));
 		
 		$content[] = wp_nonce_field (basename (__FILE__), self::NONCE_NAME);
 		$content[] = '<p><strong>' . $title . '</strong><br />';
@@ -376,7 +377,7 @@ class WP_Avertere extends WP_PluginBase {
 		$title = __('Redirection Type', 'wp-avertere');
 		$name = 'wp_avertere_type';
 		$id = 'wp-avertere-type';
-		$meta = esc_attr (get_post_meta ($post->ID, $name, true));
+		$meta = esc_attr (get_post_meta ($post->ID, self::TYPE_KEY, true));
 		if (!isset ($meta) || empty ($meta)) {
 			$meta = self::REDIRECT_PERMANENT;
 		}
