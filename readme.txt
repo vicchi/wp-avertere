@@ -4,7 +4,7 @@ Donate link: http://www.vicchi.org/codeage/donate
 Tags: wp-avertere, redirect, redirection, http, 301, 302, temporary, permanent, post, page
 Requires at least: 3.4
 Tested up to: 3.4.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,13 +103,20 @@ WP Avertere is named after the latin for "divert", meaning to turn aside from a 
 
 == Changelog ==
 
-The current version is 1.0.0 (2012.07.17)
+The current version is 1.0.1 (2012.08.29)
+
+= 1.0.1 =
+* Released 2012.08.29
+* Fixed: bug where the redirect URL was correctly saved but not shown in the plugin's meta box when a post/page is saved or updated.
 
 = 1.0.0 =
 * Released 2012.07.17
 * First version of WP Avertere released.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Bug fix release. Fixes bug where the redirect URL was correctly saved and used but not displayed in the plugin's meta box.
 
 = 1.0.0 =
 * This is the first version of WP Avertere.
