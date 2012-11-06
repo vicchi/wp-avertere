@@ -3,8 +3,8 @@ Contributors: vicchi
 Donate link: http://www.vicchi.org/codeage/donate
 Tags: wp-avertere, redirect, redirection, http, 301, 302, temporary, permanent, post, page
 Requires at least: 3.4
-Tested up to: 3.4.1
-Stable tag: 1.0.1
+Tested up to: 3.4.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,7 +103,14 @@ WP Avertere is named after the latin for "divert", meaning to turn aside from a 
 
 == Changelog ==
 
-The current version is 1.0.1 (2012.08.29)
+The current version is 1.1.0 (2012.11.06)
+
+= 1.1.0 =
+* Released 2012.11.06
+* Added: Ensure that the template_redirect hook code is only fired within the context of a post being displayed.
+* Added: Enqueue non-minified versions of the plugin's CSS and JS files if WP_DEBUG or WQUADRATUM_DEBUG are defined.
+* Other: Updated to latest version of WP_PluginBase.
+* Other: Moved all submodule classes/libraries from the plugin's root directory to /includes.
 
 = 1.0.1 =
 * Released 2012.08.29
@@ -114,6 +121,9 @@ The current version is 1.0.1 (2012.08.29)
 * First version of WP Avertere released.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Housekeeping/maintenance release. Fixes bug where the plugin's template_redirect hook could be fired outside of the context of a post, plus library upgrades.
 
 = 1.0.1 =
 Bug fix release. Fixes bug where the redirect URL was correctly saved and used but not displayed in the plugin's meta box.
