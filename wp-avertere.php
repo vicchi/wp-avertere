@@ -12,6 +12,7 @@ Text Domain: wp-avertere
 
 define ('WPAVERTERE_PATH', plugin_dir_path (__FILE__));
 define ('WPAVERTERE_URL', plugin_dir_url (__FILE__));
+//define ('WPAVERTERE_DEBUG', true);
 
 require_once (WPAVERTERE_PATH . '/includes/wp-plugin-base/wp-plugin-base.php');
 
@@ -283,8 +284,15 @@ if (!class_exists ('WP_Avertere')) {
 
 			if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
 				$deps = array ('jquery');
-				wp_enqueue_script ('wp-avertere-admin-script', WPAVERTERE_URL . 'js/wp-avertere-admin.min.js', $deps);
-				//wp_enqueue_script ('wp-avertere-admin-script', WPAVERTERE_URL . 'js/wp-avertere-admin.js', $deps);
+				if (WP_DEBUG || WPAVERTERE_DEBUG) {
+					$js_url = 'js/wp-avertere-admin.js';
+				}
+				
+				else {
+					$js_url = 'js/wp-avertere-admin.min.js'
+				}
+				
+				wp_enqueue_script ('wp-avertere-admin-script', WPAVERTERE_URL . $js_url, $deps);
 				wp_localize_script ('wp-avertere-admin-script',
 					'WPRedirectAJAX',
 					array (
@@ -302,8 +310,15 @@ if (!class_exists ('WP_Avertere')) {
 			global $pagenow;
 
 			if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
-				wp_enqueue_style ('wp-avertere-admin-style', WPAVERTERE_URL . 'css/wp-avertere-admin.min.css');	
-				//wp_enqueue_style ('wp-avertere-admin-style', WPAVERTERE_URL . 'css/wp-avertere-admin.css');	
+				if (WP_DEBUG || WPAVERTERE_DEBUG) {
+					$css_url = 'css/wp-avertere-admin.css';
+				}
+				
+				else {
+					$css_url = 'css/wp-avertere-admin.min.css';
+				}
+				
+				wp_enqueue_style ('wp-avertere-admin-style', WPAVERTERE_URL . $css_url);	
 			}
 		}
 
