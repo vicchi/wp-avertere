@@ -17,7 +17,7 @@ define ('WPAVERTERE_URL', plugin_dir_url (__FILE__));
 require_once (WPAVERTERE_PATH . '/includes/wp-plugin-base/wp-plugin-base.php');
 
 if (!class_exists ('WP_Avertere')) {
-	class WP_Avertere extends WP_PluginBase_v1_0 {
+	class WP_Avertere extends WP_PluginBase_v1_1 {
 		const OPTIONS = 'wp_avertere_settings';
 		const VERSION = '101';
 		const DISPLAY_VERSION = 'v1.0.1';
@@ -289,7 +289,7 @@ if (!class_exists ('WP_Avertere')) {
 				}
 				
 				else {
-					$js_url = 'js/wp-avertere-admin.min.js'
+					$js_url = 'js/wp-avertere-admin.min.js';
 				}
 				
 				wp_enqueue_script ('wp-avertere-admin-script', WPAVERTERE_URL . $js_url, $deps);
