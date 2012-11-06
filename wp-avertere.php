@@ -172,11 +172,14 @@ class WP_Avertere extends WP_PluginBase {
 	
 	function template_redirect () {
 		global $post;
-		$url = get_post_meta ($post->ID, self::URL_KEY, true);
-		$status = get_post_meta ($post->ID, self::TYPE_KEY, true);
-		if (isset ($url) && !empty ($url) && is_singular ()) {
-			wp_redirect ($url, $status);
-			exit;
+
+		if (isset ($post)) {
+			$url = get_post_meta ($post->ID, self::URL_KEY, true);
+			$status = get_post_meta ($post->ID, self::TYPE_KEY, true);
+			if (isset ($url) && !empty ($url) && is_singular ()) {
+				wp_redirect ($url, $status);
+				exit;
+			}
 		}
 	}
 
